@@ -56,137 +56,53 @@ public class It21986 {
         
         
         Scanner sc = new Scanner(System.in);
+        
+        boolean flag=true;
+        
+        while(flag){
         System.out.println("Please choose a function:\n1.List an asset\n2.Make a Reservation\n3.Change a reservation\n4.Show Reports\n5.Exit");
-        int response = sc.nextInt();
-        System.out.println("Response is " + response);
-        switch (response) {
-            case 1:
+        int response = Integer.parseInt(sc.nextLine());
+        if(response==1) {
             System.out.println("Enter your AFM:");
             String res=sc.next(); // AFM
-            boolean flag = true;
-            while(true) {
+            boolean exists = false;
             for(int i=0;i<+listOwner.size();i++){
                 Owner owner = (Owner) listOwner.get(i);
-                if(owner.afm.equals(res)){ 
-                    House  newHouse = new House();
-                    System.out.println("Please enter your name:");
-                    newHouse.setOwnerName(sc.next());
-                    System.out.println("Please enter house name:");
-                    newHouse.setName(sc.next());
-                    System.out.println("Please enter municipality:");
-                    newHouse.setMunicipality(sc.next());
-                    System.out.println("Please enter house address:");
-                    newHouse.setAddress(sc.next());
-                    System.out.println("Please enter guest number:");
-                    newHouse.setGuestnum(sc.nextInt());
-                    System.out.println("Please enter number of bedrooms:");
-                    newHouse.setBednum(sc.nextInt());
-                    System.out.println("Does the house have WiFi? (answer true or false)");
-                    newHouse.setHasWifi(sc.nextBoolean());
-                    System.out.println("Does the house have a TV? (answer true or false)");
-                    newHouse.setHasTv(sc.nextBoolean());
-                    System.out.println("Does the house have Parking? (answer true or false)");
-                    newHouse.setHasParking(sc.nextBoolean());
-                    System.out.println("What kind of view does it have? (answer street,sea,mountain )");
-                    newHouse.setView(sc.next());
-                    System.out.println("What is the distance from the nearest Metro Station?");
-                    newHouse.setDisMetro(sc.nextInt());
-                    System.out.println("How much is the cost per day??");
-                    newHouse.setPpd(sc.nextInt());
-                    newHouse.setComfort();
-                    newHouse.setId();
-                    
-                    System.out.println("Is the house a Resort? (answer true or false)");
-                    boolean res3=sc.nextBoolean();
-                    if(res3==true){
-                        Resort newResort = new Resort();
-                        newResort.ownerName=newHouse.ownerName;
-                        newResort.municipality=newHouse.municipality;
-                        newResort.address=newHouse.address;
-                        newResort.ownerAfm=newHouse.ownerAfm;
-                        newResort.guestnum=newHouse.guestnum;
-                        newResort.bednum=newHouse.bednum;
-                        newResort.hasWifi=newHouse.hasWifi;
-                        newResort.hasParking=newHouse.hasParking;
-                        newResort.view=newHouse.view;
-                        newResort.disMetro=newHouse.disMetro;
-                        newResort.ppd=newHouse.ppd;
-                        newResort.comfort=newHouse.comfort;
-                        newResort.id=newHouse.id;
-                        newResort.isApartment=newHouse.isApartment;
-                        newResort.isResort=newHouse.isResort;
-                        
-                        System.out.println("Please enter the pool square meters:");
-                        newResort.setPoolSqmt(sc.nextInt());
-                        System.out.println("Please enter the garden square meters:");
-                        newResort.setGardenSqmt(sc.nextInt());
-                        System.out.println("Does the resort have a BBQ?");
-                        newResort.setHasBbq(sc.nextBoolean());
-                        listHouse.add(newResort);
-                        flag=false;
-                        break;
-                    }
-                    System.out.println("Is the house an Apartment? (answer true or false)");
-                    boolean res4=sc.nextBoolean();
-                    if(res4==true){
-                        Apartment newApartment = new Apartment();
-                         newApartment.ownerName=newHouse.ownerName;
-                        newApartment.municipality=newHouse.municipality;
-                        newApartment.address=newHouse.address;
-                        newApartment.ownerAfm=newHouse.ownerAfm;
-                        newApartment.guestnum=newHouse.guestnum;
-                        newApartment.bednum=newHouse.bednum;
-                        newApartment.hasWifi=newHouse.hasWifi;
-                        newApartment.hasParking=newHouse.hasParking;
-                        newApartment.view=newHouse.view;
-                        newApartment.disMetro=newHouse.disMetro;
-                        newApartment.ppd=newHouse.ppd;
-                        newApartment.comfort=newHouse.comfort;
-                        newApartment.id=newHouse.id;
-                        newApartment.isApartment=newHouse.isApartment;
-                        newApartment.isResort=newHouse.isResort;
-                        System.out.println("Please enter the apartment floor:");
-                        newApartment.setFloor(sc.nextInt());
-                        System.out.println("Does the apartment have an elevator?");
-                        newApartment.setHasElevator(sc.nextBoolean());
-                        System.out.println("Does the apartment have a balcony?");
-                        newApartment.setHasBalcony(sc.nextBoolean());
-                        listHouse.add(newApartment);
-                        flag=false;
-                        break;
-                    }
-                    listHouse.add(newHouse);
-                    flag=false;
-                    break;
+                if(owner.afm.equals(res)){
+                 exists=true;
+                 House newHouse = new House();
+                 newHouse.createHouse(newHouse);
+                 listHouse.add(newHouse.createHouse(newHouse));
+                } 
+                
                 }
-            } //an den exei kanei break mexri stigmhs ayto shmainei oti den yparxei to afk ara ftiaxnw idiokthth
+            if(exists==false){
             Owner newOwner = new Owner();
-            newOwner.setAfm(res);
-            System.out.println("Registering as a new user, please tell me your name:");
-            newOwner.setName(sc.next());
-            System.out.println("Please enter your home address:");
-            newOwner.setAddressOwner(sc.next());
-            System.out.println("Please enter your Government ID Number:");
-            newOwner.setIdnum(sc.next());
-            listOwner.add(newOwner);
-            break;
+            newOwner.createOwner(res, newOwner);
             }
-            break;
-            case 2:
-                System.out.println("Make a reservation");
-            break;
-            case 3:
-                System.out.println("Change a Reservation");
-            break;
-            case 4:
-                System.out.println("Showing reports...");
-            break;
-            case 5:
-                System.out.println("Exiting...");
-            break;
-            default:
-                break;
+            System.out.println("Please choose a function:\n1.List an asset\n2.Make a Reservation\n3.Change a reservation\n4.Show Reports\n5.Exit");
+            response = Integer.parseInt(sc.nextLine());
         
+        } else if(response==2){
+                System.out.println("Make a reservation");
+                 System.out.println("Please choose a function:\n1.List an asset\n2.Make a Reservation\n3.Change a reservation\n4.Show Reports\n5.Exit");
+                response = Integer.parseInt(sc.nextLine());
+                
+        }else if (response==3){
+            
+                System.out.println("Change a Reservation");
+                System.out.println("Please choose a function:\n1.List an asset\n2.Make a Reservation\n3.Change a reservation\n4.Show Reports\n5.Exit");
+                response = Integer.parseInt(sc.nextLine());
+        
+        }else if (response==4){
+            
+            System.out.println("Showing reports...");
+            System.out.println("Please choose a function:\n1.List an asset\n2.Make a Reservation\n3.Change a reservation\n4.Show Reports\n5.Exit");
+            response = Integer.parseInt(sc.nextLine());
+        }else if(response==5){
+                System.out.println("Exiting...");
+                flag=false;
+        }
     
     }
        

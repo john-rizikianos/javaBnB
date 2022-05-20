@@ -1,5 +1,6 @@
 package com.mycompany.it21986;
 import java.util.Random;
+import java.util.Scanner;
 
 /**
  *
@@ -189,4 +190,94 @@ public class House {
     public void entryMade(){
         System.out.println("House ID: " + this.id + "Owner Name: " + this.ownerName + "Owner AFM: " + this.ownerAfm);
     }
+public House createHouse(House newHouse){
+    Scanner sc = new Scanner(System.in);
+                    System.out.println("Please enter your name:");
+                    newHouse.setOwnerName(sc.nextLine());
+                    System.out.println("Please enter house name:");
+                    newHouse.setName(sc.nextLine());
+                    System.out.println("Please enter municipality:");
+                    newHouse.setMunicipality(sc.nextLine());
+                    System.out.println("Please enter house address:");
+                    newHouse.setAddress(sc.nextLine());
+                    System.out.println("Please enter guest number:");
+                    newHouse.setGuestnum(Integer.parseInt(sc.nextLine()));
+                    System.out.println("Please enter number of bedrooms:");
+                    newHouse.setBednum(Integer.parseInt(sc.nextLine()));
+                    System.out.println("Does the house have WiFi? (answer true or false)");
+                    newHouse.setHasWifi(Boolean.parseBoolean(sc.nextLine()));
+                    System.out.println("Does the house have a TV? (answer true or false)");
+                    newHouse.setHasTv(Boolean.parseBoolean(sc.nextLine()));
+                    System.out.println("Does the house have Parking? (answer true or false)");
+                    newHouse.setHasParking(Boolean.parseBoolean(sc.nextLine()));
+                    System.out.println("What kind of view does it have? (answer street,sea,mountain )");
+                    newHouse.setView(sc.nextLine());
+                    System.out.println("What is the distance from the nearest Metro Station?");
+                    newHouse.setDisMetro(Integer.parseInt(sc.nextLine()));
+                    System.out.println("How much is the cost per day??");
+                    newHouse.setPpd(Integer.parseInt(sc.nextLine()));
+                    newHouse.setComfort();
+                    newHouse.setId();
+                    
+                    System.out.println("Is the house a Resort? (answer true or false)");
+                    boolean res3=Boolean.parseBoolean(sc.nextLine());
+                    if(res3==true){
+                        Resort newResort = new Resort();
+                        newResort.ownerName=newHouse.ownerName;
+                        newResort.municipality=newHouse.municipality;
+                        newResort.address=newHouse.address;
+                        newResort.ownerAfm=newHouse.ownerAfm;
+                        newResort.guestnum=newHouse.guestnum;
+                        newResort.bednum=newHouse.bednum;
+                        newResort.hasWifi=newHouse.hasWifi;
+                        newResort.hasParking=newHouse.hasParking;
+                        newResort.view=newHouse.view;
+                        newResort.disMetro=newHouse.disMetro;
+                        newResort.ppd=newHouse.ppd;
+                        newResort.comfort=newHouse.comfort;
+                        newResort.id=newHouse.id;
+                        newResort.isApartment=newHouse.isApartment;
+                        newResort.isResort=newHouse.isResort;
+                        
+                        
+                        System.out.println("Please enter the pool square meters:");
+                        newResort.setPoolSqmt(Integer.parseInt(sc.nextLine()));
+                        System.out.println("Please enter the garden square meters:");
+                        newResort.setGardenSqmt(Integer.parseInt(sc.nextLine()));
+                        System.out.println("Does the resort have a BBQ?");
+                        newResort.setHasBbq(Boolean.parseBoolean(sc.nextLine()));
+                        return newResort;
+                       }
+                    System.out.println("Is the house an Apartment? (answer true or false)");
+                    boolean res4=Boolean.parseBoolean(sc.nextLine());
+                    if(res4==true){
+                        Apartment newApartment = new Apartment();
+                         newApartment.ownerName=newHouse.ownerName;
+                        newApartment.municipality=newHouse.municipality;
+                        newApartment.address=newHouse.address;
+                        newApartment.ownerAfm=newHouse.ownerAfm;
+                        newApartment.guestnum=newHouse.guestnum;
+                        newApartment.bednum=newHouse.bednum;
+                        newApartment.hasWifi=newHouse.hasWifi;
+                        newApartment.hasParking=newHouse.hasParking;
+                        newApartment.view=newHouse.view;
+                        newApartment.disMetro=newHouse.disMetro;
+                        newApartment.ppd=newHouse.ppd;
+                        newApartment.comfort=newHouse.comfort;
+                        newApartment.id=newHouse.id;
+                        newApartment.isApartment=newHouse.isApartment;
+                        newApartment.isResort=newHouse.isResort;
+                        System.out.println("Please enter the apartment floor:");
+                        newApartment.setFloor(Integer.parseInt(sc.nextLine()));
+                        System.out.println("Does the apartment have an elevator?");
+                        newApartment.setHasElevator(Boolean.parseBoolean(sc.nextLine()));
+                        System.out.println("Does the apartment have a balcony?");
+                        newApartment.setHasBalcony(Boolean.parseBoolean(sc.nextLine()));
+                        return newApartment;
+                        
+                        
+                    }
+                    return newHouse;
+}
+
 }
