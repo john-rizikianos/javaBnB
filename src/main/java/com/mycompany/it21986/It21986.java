@@ -35,13 +35,13 @@ public class It21986 {
         listHouse.add(house3);
         
         //Reservation init
-        Reservation reservation1 = new Reservation(0001,"0107", "0707",1001,"01020304050607",490);
+        Reservation reservation1 = new Reservation(0001,"0107", "0707",1001,"01020304050607",490,"Nea Ionia", 4,false,0);
         listReservation.add(reservation1);
         
-        Reservation reservation2 = new Reservation(0002,"0307", "1307",1002,"0304050607080910111213",550);
+        Reservation reservation2 = new Reservation(0002,"0307", "1307",1002,"0304050607080910111213",550,"Metamorfosh",1,false,0);
         listReservation.add(reservation2);
         
-        Reservation reservation3 = new Reservation(0003,"0107", "0707",1003,"01020304050607",2450);
+        Reservation reservation3 = new Reservation(0003,"0107", "0707",1003,"01020304050607",2450,"Metamorfosh",4,false,0);
         listReservation.add(reservation3);
         
         //Client init
@@ -78,21 +78,76 @@ public class It21986 {
                 }
             if(exists==false){
             Owner newOwner = new Owner();
-            newOwner.createOwner(res, newOwner);
+            listOwner.add(newOwner.createOwner(res, newOwner));
             }
             System.out.println("Please choose a function:\n1.List an asset\n2.Make a Reservation\n3.Change a reservation\n4.Show Reports\n5.Exit");
             response = Integer.parseInt(sc.nextLine());
         
         } else if(response==2){
-                System.out.println("Make a reservation");
-                 System.out.println("Please choose a function:\n1.List an asset\n2.Make a Reservation\n3.Change a reservation\n4.Show Reports\n5.Exit");
-                response = Integer.parseInt(sc.nextLine());
-                
-        }else if (response==3){
+                System.out.println("Enter your AFM to make a reservation");
+                String res=sc.nextLine();
+                //TODO TODO
+                boolean exists = false;
+                for(int i=0;i<+listClient.size();i++){
+                    Client client = (Client) listClient.get(i);
+                    if(client.afm.equals(res)){
+                        exists=true;
+                        //search before RESERVATION
+                        Reservation newRes = new Reservation();
+                        newRes.initSearch(newRes);//initialises search
+                        for(i =0; i<=listHouse.size();i++){
+                            House house = (House) listHouse.get(i);
+                            //int houseID =listHouse.get(house.id);
+                            for(int j=0;j<=listReservation.size();j++){
+                                Reservation reservation = (Reservation) listReservation.get(j);
+                                if(reservation.housId==house.id){
+                                reservation.checkAvailability(house,reservation);//shows available houses
+                            }
+                            }
+                        }
+                        System.out.println("Please enter the House ID: ");
+                        int houseId = Integer.parseInt(sc.nextLine());
+                        for(int k=0;k<=listHouse.size();i++){
+                            House house = (House) listHouse.get(k);
+                                if(house.id==houseId){
+                                listReservation.add(newRes.createReservation(newRes,house));//creates reservation
+                                
+                                }
+                        }
+                                        
+                }
+                }
+                if(exists==false){
+                Client newClient = new Client();
+                listClient.add(newClient.createClient(res, newClient));
+            }
+            System.out.println("Please choose a function:\n1.List an asset\n2.Make a Reservation\n3.Change a reservation\n4.Show Reports\n5.Exit");
+            response = Integer.parseInt(sc.nextLine());
             
-                System.out.println("Change a Reservation");
-                System.out.println("Please choose a function:\n1.List an asset\n2.Make a Reservation\n3.Change a reservation\n4.Show Reports\n5.Exit");
-                response = Integer.parseInt(sc.nextLine());
+        }else if (response==3){
+            System.out.println("Please enter the Reservation Id: (for testing: 1001, 1002, 1003)");
+            int alterable = Integer.parseInt(sc.nextLine());
+            boolean found = false;
+            for(int i=0;i<=listReservation.size();i++){
+                Reservation reservation = (Reservation) listReservation.get(i);
+                if(alterable==reservation.resId){
+                    System.out.println("Would you like to \n1.Alter a reservation \n2.Cancel a reservation?");
+                    int reply = Integer.parseInt(sc.nextLine());
+                    if(reply==1){
+                    reservation.alterRes(reservation);
+                    found=true;
+                    }else{
+                    reservation.cancelRes(reservation);
+                    listReservation.remove(i);
+                    found=true;
+                    }
+                }
+            }
+            if(found==false){
+                System.out.println("Reservation not found! Try again or make a new one! (dont, because it doesnt work!)");
+            }
+            System.out.println("Please choose a function:\n1.List an asset\n2.Make a Reservation\n3.Change a reservation\n4.Show Reports\n5.Exit");
+            response = Integer.parseInt(sc.nextLine());
         
         }else if (response==4){
             

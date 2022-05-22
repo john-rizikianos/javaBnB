@@ -1,5 +1,7 @@
 package com.mycompany.it21986;
 
+import java.util.Scanner;
+
 /**
  *
  * @author johnrizikianos
@@ -15,6 +17,9 @@ public class Client {
         this.name = name;
         this.email = email;
         this.idnum = idnum;
+    }
+    
+    public Client(){
     }
 
     public String getAfm() {
@@ -47,6 +52,18 @@ public class Client {
 
     public void setIdnum(String idnum) {
         this.idnum = idnum;
+    }
+    
+    public Client createClient(String afm, Client Client){
+        Scanner sc = new Scanner(System.in);
+            Client.setAfm(afm);
+            System.out.println("Registering as a new client, please tell me your name:");
+            Client.setName(sc.nextLine());
+            System.out.println("Please enter your ID Number:");
+            Client.setIdnum(sc.nextLine());
+            System.out.println("Please enter your email address:");
+            Client.setEmail(sc.nextLine());
+        return Client;
     }
     
 }
